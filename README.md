@@ -202,5 +202,157 @@ sudo journalctl -u generate-index.service
 ```
 
 
+## **Task Three:** Configuring Nginx
+
+
+**Step 1:** Install Nginx
+
+Our first step is to install Nginx using this command:
+
+```
+sudo pacman -Syu nginx
+```
+
+
+**Step 2:** Open the file
+
+Our next goal is to configure the Nginx file.
+First, we have to open it with this command:
+
+```
+sudo nvim /etc/nginx/nginx.conf
+```
+
+It should look like this:
+
+**img**
+
+
+**Step 3:** Configure user
+
+Our next step is to locate `user` and to change it to:
+
+```
+user webgen;
+```
+
+> [!NOTE]
+> In the screenshot above, user is at the top of the script.
+> you will not only want to change it to webgen, but also delete the `#` sign
+
+
+**Step 4:** Creating two new directories
+
+next, we will want to create two separate server block files instead of modifying the main nginx.conf file. The reason we want to do this is so that it is easier to manage configurations, and if changes are made it wouldn't affect the main nginx.conf file. 
+
+
+First, we will create the sites-available directory:
+
+ ```
+sudo mkdir -p /etc/nginx/sites-available
+```
+
+
+Next, we will create the sites-enabled directory:
+
+```
+sudo mkdir -p /etc/nginx/sites-enabled
+```
+
+**Step 5:** Create a new configuration file
+
+use this command to create a new server block:
+
+```
+sudo nvim /etc/nginx/sites-available/webgen.conf
+```
+
+
+**Step 6:** Add content
+
+once inside the new script, add the following contents:
+
+```
+server {
+   listen 80;
+   server_name localhost-webgen;
+
+   root /var/lib/webgen/HTML;
+   index index.html;
+
+   location / {
+      try_files $uri $uri/ =404;
+   }
+}
+```
+
+**Explanation:**
+
+The server is set up to listen on port 80 and serve files from the /var/lib/webgen/HTML directory in response to requests to localhost-webgen by this Nginx server block. It ensures that a 404 Not Found error will be displayed for any wrong requests and that only existing files or directories are provided.
+
+**Step 7:** Enable Server Block
+
+Next, we want to create a symbolic link in ordeer to enable our new configuration.
+
+This can be done by using this command:
+
+```
+sudo ln -s /etc/nginx/sites-available/webgen.conf /etc/nginx/sites-enabled/
+```
+
+**Step 8:** Open nginx.conf file and add the new directory
+
+First we need to open the file using: `sudo nvim /etc/nginx/nginx.conf`
+
+After it is opened, locate the http section and add the following line:
+
+```
+include /etc/nginx/sites-enabled/*.conf;
+```
+
+it should look like this:
+
+**img**
+
+
+**Step 9:** Check for errors
+
+To confirm that the Nginx file has no errors, run this command:
+```
+sudo nginx -t
+```
+
+
+**Step 10:** Restart Nginx
+
+
+use this command to restart Nginx to apply changes:
+
+```
+sudo systemctl restart nginx
+```
+
+**Step 11:** Start Nginx:
+
+We want to restart Nginx using:
+
+```
+sudo systemctl start nginx
+```
+
+
+**Step 12:** Check status
+
+To confirm Nginx is up and running, use:
+
+```
+sudo systemctl status nginx
+```
+
+
+## **Task Four:**
+
+
+
 
 
