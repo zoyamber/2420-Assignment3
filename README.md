@@ -350,7 +350,71 @@ sudo systemctl status nginx
 ```
 
 
-## **Task Four:**
+## **Task Four:** Installing and configuring ufw for ssh and HTTP
+
+
+**Step 1:** Install UFW
+
+install ufw using this command:
+
+```
+sudo pacman -Syu ufw
+```
+
+> [!IMPORTANT]
+> Do `NOT` Enable ufw immeditaley after installation
+
+
+**Step 2:** Allow SSH and HTTP from anywhere
+
+Use these two commands:
+
+```
+sudo ufw allow ssh
+```
+
+```
+sudo ufw allow http
+```
+
+
+**Step 3:** Enable rate limiting
+
+To enhance security and protect against unauthorized access attempts, enable SSH rate limiting to prevent brute-force attacks by using the following command:
+
+```
+sudo ufw limit ssh
+```
+
+
+**Step 4:** Enable UFW
+
+enter the following command to enable UFW:
+
+```
+sudo ufw enable
+```
+
+**Step 5:** Check UFW status
+
+to check the status of the UFW, and to check whether the rules are applied use this command:
+
+```
+sudo ufw status 
+```
+
+The output should look like this:
+
+```
+Status: active
+
+To                         Action      From
+--                         ------      ----
+22                         LIMIT       Anywhere
+80                         ALLOW       Anywhere
+22 (v6)                    LIMIT       Anywhere (v6)
+80 (v6)                    ALLOW       Anywhere (v6)
+```
 
 
 
