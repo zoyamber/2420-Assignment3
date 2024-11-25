@@ -137,7 +137,7 @@ Once you are inside the nvim text editor, you will want to add the following con
 
 ```
 [Unit]
-Description=Timer for Generate Index Service
+Description=Timer to run script daily
 
 [Timer]
 OnCalendar=*-*-* 05:00:00
@@ -174,7 +174,7 @@ sudo systemctl enable generate-index.timer
 
 **Step 5:** Timer status
 
-Once the timer has been set up and started, we want to confirm the status of the timer to make sure that everything is working correctly.
+Once the timer has been set up and started, we want to confirm its status to ensure that everything is working correctly.
 
 to verify that the timer is active and that the service runs successfully,
 
@@ -225,7 +225,7 @@ sudo nvim /etc/nginx/nginx.conf
 
 It should look like this:
 
-**img**
+![Screenshot] <img src = "./imgtwo.png">
 
 
 **Step 3:** Configure user
@@ -312,7 +312,7 @@ include /etc/nginx/sites-enabled/*.conf;
 
 it should look like this:
 
-**img**
+![Screenshot] <img src = "./imgthree.png">
 
 
 **Step 9:** Check for errors
@@ -458,7 +458,7 @@ http://146.190.36.50/
 
 the output should look something like this:
 
-**img**
+![Screenshot] <img src = "./imgfive.png">
 
 
 
