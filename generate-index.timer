@@ -1,0 +1,11 @@
+
+[Unit]
+Description=Timer to run script daily
+
+[Timer]
+OnCalendar=*-*-* 05:00:00
+Unit=generate-index.service
+Persistent=true
+
+[Install]
+WantedBy=timers.target
