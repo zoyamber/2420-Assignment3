@@ -99,3 +99,108 @@ sudo chown -R webgen:webgen /var/lib/webgen
 
 
 
+**Step 1:** Create the generate-index.service file
+
+The first step of this task is to use the command below to create the generate-index.service file 
+
+```
+sudo nvim /etc/systemd/system/generate-index.service
+```
+
+Once you are inside the nvim text editor, you will want to type the following content inside of it:
+
+```
+[Unit]
+Description=Generate Index Service File
+
+[Service]
+Type=simple
+User=webgen
+Group=webgen
+ExecStart=/var/lib/webgen/bin/generate_index
+```
+
+**Explanation:**
+- **[Unit]:** Describes the service 
+- **[Service]:** Defines how the service should behave when started
+  
+
+**Step 2:** Create the generate-index.timer file
+
+The next step is to use the command below to create the generate-index.timer file
+
+```
+sudo nvim /etc/systemd/system/generate-index.timer
+```
+
+Once you are inside the nvim text editor, you will want to add the following content inside of it:
+
+```
+[Unit]
+Description=Timer for Generate Index Service
+
+[Timer]
+OnCalendar=*-*-* 05:00:00
+Unit=generate-index.service
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+
+**Explanation:**
+- **[Timer]:** This specifies the schedule of the timer 
+- **[Install]:** This Specifies how timer works with systemd
+
+
+**Step 3:**  Start Timer
+
+This command starts the generate-index.timer right away.
+
+```
+sudo systemctl start generate-index.timer
+```
+
+
+**Step 4:** Enable timer
+
+This command configures the timer to start automatically when the system is booted.
+
+```
+sudo systemctl enable generate-index.timer
+```
+
+
+**Step 5:** Timer status
+
+Once the timer has been set up and started, we want to confirm the status of the timer to make sure that everything is working correctly.
+
+to verify that the timer is active and that the service runs successfully,
+
+Run this command:
+
+```
+systemctl status generate-index.timer
+```
+
+The output should look like this:
+
+**img**
+
+
+> [!NOTE]
+> run `systemctl status generate-index.service` to check the status of the service
+
+
+**Step 6:** View logs
+
+To view the logs of the generated-index.service, run this command:
+
+```
+sudo journalctl -u generate-index.service
+```
+
+
+
+
