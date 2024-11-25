@@ -418,5 +418,62 @@ To                         Action      From
 
 
 
+## **Task Five:** Verification
+
+
+**Step 1:** Reload and Restart
+
+Use these three commands to reload the system and start it up again:
+
+```
+sudo systemctl daemon-reload
+```
+
+```
+sudo systemctl start nginx.service
+```
+
+```
+sudo systemctl enable nginx.service
+```
+
+
+**Step 2:** Get IP address
+
+Our next step is to log into our Digital Ocean account.
+
+Go to the droplet section, and there you should be able to copy your droplets IP adress
+
+
+**Step 3:** Visit the IP address
+
+Once we have copied our IP address, we will want to open a new tab, and type `http://` along with our droplets IP address.
+
+example:
+
+```
+http://146.190.36.50/
+```
+
+
+the output should look something like this:
+
+**img**
+
+
+
+**Congratulations!!** You have successfully setup a Bash script that generates a static index.html file that contains some system information.The script will be configured to run automatically every day at 05:00 using a systemd service and timer. The HTML document created by this script willbe served with an nginx web server that will run on your Arch Linux droplet along with a firewall setup using ufw to help secure your server.
+
+
+
+## **Refrences**
+
+1. https://wiki.archlinux.org/title/Users_and_groups#Example_adding_a_system_user.
+
+2. https://wiki.archlinux.org/title/Nginx
+
+3. https://wiki.archlinux.org/title/Uncomplicated_Firewall 
+
+4. https://gitlab.com/cit2420/2420-notes-f24/-/tree/main
 
 
